@@ -50,6 +50,7 @@ import time
 import optparse
 import lib.xcairo as xcairo
 import lib.holiday as holiday
+import lib.data as data
 import lib
 
 from lib.plugin import *
@@ -187,6 +188,8 @@ def get_parser():
                     help="modify a style variable, e.g. dom.frame_thickness=0")
     parser.add_option("--geom-var", action="append", dest="geom_assign",
                     help="modify a geometry variable")
+    parser.add_option("--datasource", default=None, action="append", dest="ics_file",
+                    help="include calendar data from ics file")
     return parser
 
 
@@ -283,10 +286,16 @@ def main_program():
     hprovider = holiday.HolidayProvider(Style.dom, Style.dom_weekend,
                                  Style.dom_holiday, Style.dom_weekend_holiday,
                                  Style.dom_multi, Style.dom_weekend_multi, options.multiday_holidays)
+    dataprovider = data.DataProvider(Style.dom)
 
     if options.holidays:
         for f in options.holidays:
             hprovider.load_holiday_file(f)
+            
+    if options.ics_file:
+        print(options.ics_file)
+        for f in options.ics_file:
+            dataprovider.load_data_file(f)
 
     if options.long_daynames:
         Language.day_name = Language.long_day_name
@@ -298,8 +307,8 @@ def main_program():
     else:
         Language.month_name = Language.long_month_name
 
-    renderer = Layout.CalendarRenderer(Outfile, Year, Month, MonthSpan,
-                                        (Style,Geometry,Language), hprovider, lib._version, loptions)
+    renderer = Layout.CalendarRenderer(Outfile, Year, Month, MonthSpan,(Style,Geometry,Language), 
+                                        hprovider, dataprovider, lib._version, loptions)
     renderer.render()
 
 

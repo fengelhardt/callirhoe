@@ -80,14 +80,16 @@ class DayCell(object):
     @ivar day: day of week
     @ivar header: header string
     @ivar footer: footer string
+    @ivar data_text: text filling entire cell
     @ivar theme: (Style class,Geometry class,Language module) tuple
     @type show_day_name: bool
     @ivar show_day_name: whether day name is displayed
     """
-    def __init__(self, day, header, footer, theme, show_day_name, lightweight = False):
+    def __init__(self, day, header, footer, theme, data_text, show_day_name, lightweight = False):
         self.day = day
         self.header = header
         self.footer = footer
+        self.data_text = data_text
         self.theme = theme
         self.show_day_name = show_day_name
         self.lightweight = lightweight
@@ -124,6 +126,11 @@ class DayCell(object):
             R = rect_rel_scale(rect, G.footer_size[0], G.footer_size[1], 0, 1.0 - G.footer_align)
             draw_str(cr, text = self.footer, rect = R, scaling = -1, stroke_rgba = S.footer,
                 font = S.footer_font, measure = "MgMgMg")
+        # draw data text
+        if self.data_text:
+            R = rect_rel_scale(rect, G.footer_size[0], G.size[1])
+            draw_str(cr, text = self.data_text, rect = R, scaling = -1, stroke_rgba = S.fg,
+                font = S.font, measure = "MgMgMgMgMgMg")
 
     def _draw_long(self, cr, rect):
         """render the day cell in long mode"""
@@ -157,6 +164,11 @@ class DayCell(object):
         if self.footer:
             draw_str(cr, text = self.footer, rect = Rf, scaling = -1, stroke_rgba = S.footer, align = (1,2),
                  font = S.footer_font)
+        # draw data text
+        if self.data_text:
+            R = rect_rel_scale(rect, G.footer_size[0], G.size[1])
+            draw_str(cr, text = self.data_text, rect = R, scaling = -1, stroke_rgba = S.fg,
+                font = S.font, measure = "MgMgMgMgMgMg")
 
     def draw(self, cr, rect, short_thres):
         """automatically render a short or long day cell depending on threshold I{short_thres}
@@ -178,16 +190,18 @@ class CalendarRenderer(object):
     @ivar MonthSpan: month span
     @ivar Theme: (Style module,Geometry module,Language module) tuple
     @ivar holiday_provider: L{HolidayProvider} object
+    @ivar data_provider: L{DataProvider} object
     @ivar version_string: callirhoe version string
     @ivar options: parser options object
     """
-    def __init__(self, Outfile, Year, Month, MonthSpan, Theme, holiday_provider, version_string, options):
+    def __init__(self, Outfile, Year, Month, MonthSpan, Theme, holiday_provider, data_provider, version_string, options):
         self.Outfile = Outfile
         self.Year = Year
         self.Month = Month
         self.MonthSpan = MonthSpan
         self.Theme = Theme
         self.holiday_provider = holiday_provider
+        self.data_provider = data_provider
         self.version_string = version_string
         self.options = options
 
