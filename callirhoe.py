@@ -293,7 +293,6 @@ def main_program():
             hprovider.load_holiday_file(f)
             
     if options.ics_file:
-        print(options.ics_file)
         for f in options.ics_file:
             dataprovider.load_data_file(f)
 
