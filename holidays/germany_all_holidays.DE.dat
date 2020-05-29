@@ -1,0 +1,56 @@
+# type|DATE*span|footer|header|flags
+# type|DATE1-DATE2|footer|header|flags
+# type|DATE|footer|header|flags
+#
+# type:
+# d: event occurs annually fixed day/month: MMDD
+# d: event occurs monthly, fixed day: DD
+# d: fixed day/month/year combination (e.g. deadline, trip, etc.): YYYYMMDD
+# oe: Orthodox Easter-dependent holiday, annually
+# ge: Georgios' name day, Orthodox Easter dependent holiday, annually
+# ce: Catholic Easter holiday
+#
+# DATE*span and DATE1-DATE2 supported only for YYYYMMDD
+# flags = {off, multi}
+
+d|0101||Neujahr (§)|off
+d|0106||Heilige Drei Könige (§ BW BY ST)|reminder
+d|0308||Frauentag (§ BE)|reminder
+d|0501||Tag der Arbeit (§)|off
+d|0808||Augsburger Friedensfest (§ AUGS)|reminder
+d|0815||Mariä Himmelfahrt (§ SL BY)|reminder
+d|0920||Weltkindertag (§ TH)|reminder
+d|1003||Tag der Deutschen Einheit (§)|off
+# BB, MV, SN, ST, TH
+d|1031||Reformationstag (§ BB MV SN ST TH)|reminder
+# BW, BY, NW, RP, SL
+d|1101||Allerheiligen (§ BW BY NW RP SL)|reminder
+d|1224||Heiligabend|off
+d|1225||1. Weihnachtstag (§)|off
+d|1226||2. Weihnachtstag (§)|off
+d|1231||Silvester|off
+
+ce|-52||Weiberfastnacht|reminder
+ce|-49||Karnevalssonntag|reminder
+ce|-48||Rosenmontag|reminder
+ce|-46||Aschermittwoch|reminder
+ce|-7||Palmsonntag|reminder
+ce|-2||Karfreitag (§)|off
+ce|0||Ostersonntag (§)|off
+ce|1||Ostermontag (§)|off
+ce|39||Christi Himmelfahrt (§)|off
+ce|49||Pfingsten (§)|off
+ce|50||Pfingstmontag (§)|off
+ce|60||Fronleichnam (§ BW BY HE NW RP SL SN TH)|reminder
+
+# days that are on a specific weekday after a fixed date
+# do not work here :(
+# SN, BY
+# Buß und Bettag (§)
+# Totensonntag
+# 1. Advent
+# 2. Advent
+# 3. Advent
+# 4. Advent
+# Muttertag
+# Erntedanktag
