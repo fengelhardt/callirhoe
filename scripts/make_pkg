@@ -5,14 +5,14 @@ make_python_zip() {
     tempdir="$2"
     curdir=`pwd`
     for i in `find $tempdir -type f -name "*.py" | grep -v "__init__"`; do
-       python2.7 -m py_compile $i
+       python3 -m py_compile $i
        rm $i
     done
     cd $tempdir
     zip -q -r $curdir/$base.zip *
     cd $curdir
     rm -rf $tempdir
-    echo '#!/usr/bin/env python2.7' | cat - $base.zip > $base
+    echo '#!/usr/bin/env python3' | cat - $base.zip > $base
     chmod 755 $base
     rm -f $base.zip
 }
@@ -21,7 +21,7 @@ create_callirhoe_package() {
     DIR=`mktemp -d -t callirhoe.XXX`
     tar c {geom,lang,layouts,lib,style}/*.py | tar x -C "$DIR"
     cp callirhoe.py "$DIR/__main__.py"
-    python2.7 scripts/make_resources_list.py > "$DIR/lib/resources.py"
+    python3 scripts/make_resources_list.py > "$DIR/lib/resources.py"
 
     make_python_zip callirhoe "$DIR"
 }
