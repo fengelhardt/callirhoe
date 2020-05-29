@@ -127,10 +127,9 @@ class DayCell(object):
             draw_str(cr, text = self.footer, rect = R, scaling = -1, stroke_rgba = S.footer,
                 font = S.footer_font, measure = "MgMgMg")
         # draw data text
-        if self.data_text:
-            R = rect_rel_scale(rect, G.footer_size[0], G.size[1])
+            R = rect_rel_scale(Rhf, 1.0, G.size[1], 1, 0)
             draw_str(cr, text = self.data_text, rect = R, scaling = -1, stroke_rgba = S.fg,
-                font = S.font, measure = "MgMgMgMgMgMg")
+                font = S.font, align = (0,2), measure = "MgMgMg")
 
     def _draw_long(self, cr, rect):
         """render the day cell in long mode"""
@@ -166,9 +165,9 @@ class DayCell(object):
                  font = S.footer_font)
         # draw data text
         if self.data_text:
-            R = rect_rel_scale(rect, G.footer_size[0], G.size[1])
+            R = rect_rel_scale(Rhf, 1.0, G.size[1], 1, 0)
             draw_str(cr, text = self.data_text, rect = R, scaling = -1, stroke_rgba = S.fg,
-                font = S.font, measure = "MgMgMgMgMgMg")
+                font = S.font, align = (0,2), measure = "MgMgMg")
 
     def draw(self, cr, rect, short_thres):
         """automatically render a short or long day cell depending on threshold I{short_thres}

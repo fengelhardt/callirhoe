@@ -66,7 +66,7 @@ class Date(object):
         else: return "<Date None>"
 
 class DataProvider(object):
-    """class holding the holidays throught the year(s)
+    """class providing ical data source
 
     
     @ivar fixed: fixed date events, indexed by a C{date()} object

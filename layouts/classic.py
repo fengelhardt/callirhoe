@@ -114,13 +114,14 @@ class CalendarRenderer(_base.CalendarRenderer):
                         real_dom -= span
 
                     holiday_tuple = self.holiday_provider(real_year, real_month, real_dom, col)
+                    data_tuple = self.data_provider(year, month, dom, day)
                     if is_normal:
                         day_style = holiday_tuple[2]
                     else:
                         day_style = S.dom_weekend_phantom if col >= 5 else S.dom_phantom
                     dcell = _base.DayCell(day = (real_dom, col, iso_w), header = holiday_tuple[0], footer = holiday_tuple[1],
                                           theme = (day_style, G.dom, L), show_day_name = False, 
-                                          lightweight = self.options.lightweight )
+                                          lightweight = self.options.lightweight, data_text=data_tuple[0] )
                     dcell.draw(cr, R, self.options.short_daycell_ratio)
                 else:
                     day_style = S.dom_weekend if col >= 5 else S.dom

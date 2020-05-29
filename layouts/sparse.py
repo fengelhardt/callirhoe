@@ -75,13 +75,13 @@ def get_parser(layout_name):
 parser = get_parser(__name__)
 
 def _draw_day_cell(cr, rect, day, header, footer, data_text, theme, show_day_name, text_height=None):
-    hs,ds,G,L = theme
+    ds,G,L = theme
     year, month, day_of_month, day_of_week = day
-    draw_box(cr, rect, hs.bg, hs.bg, mm_to_dots(hs.frame_thickness))
+    draw_box(cr, rect, ds.bg, ds.bg, mm_to_dots(ds.frame_thickness))
 
     if day_of_month > 1:
       x, y, w, h = rect
-      draw_line(cr, (x, y, w, 0), hs.frame, mm_to_dots(hs.frame_thickness))
+      draw_line(cr, (x, y, w, 0), ds.frame, mm_to_dots(ds.frame_thickness))
 
     if (text_height is not None) and (text_height > 0):
       x, y, w, h = rect
@@ -110,31 +110,31 @@ def _draw_day_cell(cr, rect, day, header, footer, data_text, theme, show_day_nam
     Rmiddle_bottom = (x, y, w, h)
     valign = 0 if show_day_name else 2
     # draw day of month (number)
-    draw_str(cr, text = str(day_of_month), rect = Rleft, scaling = -1, stroke_rgba = hs.fg,
-             align = (1,valign), font = hs.font, measure = "88")
+    draw_str(cr, text = str(day_of_month), rect = Rleft, scaling = -1, stroke_rgba = ds.fg,
+             align = (1,valign), font = ds.font, measure = "88")
     # draw name of day
     if show_day_name:
         draw_str(cr, text = L.day_name[day_of_week], rect = Rmiddle_bottom,
-            scaling = -1, stroke_rgba = hs.fg, align = (0,valign),
-            font = hs.font, measure = "Mo")
+            scaling = -1, stroke_rgba = ds.fg, align = (0,valign),
+            font = ds.font, measure = "Mo")
         # week number
         if day_of_week == 0 or (day_of_month == 1 and month == 1):
           week_nr = date(year, month, day_of_month).isocalendar()[1]
           draw_str(cr, text = "%s%d" % (L.week_of_year_prefix, week_nr), rect = Rmiddle_top,
-              scaling = -1, stroke_rgba = hs.fg, align = (0,valign),
-              font = hs.header_font, measure = "W88")
+              scaling = -1, stroke_rgba = ds.fg, align = (0,valign),
+              font = ds.header_font, measure = "W88")
 
     if header:
         draw_str(cr, text = header, rect = Rright_header, scaling = -1,
-          stroke_rgba = hs.header, align = (1,1), font = hs.header_font,
+          stroke_rgba = ds.header, align = (1,1), font = ds.header_font,
           measure='MgMgMgMgMgMgMgMgMg')
     if footer:
         draw_str(cr, text = footer, rect = Rright_footer, scaling = -1,
-            stroke_rgba = hs.footer, align = (1,1), font = hs.header_font,
+            stroke_rgba = ds.footer, align = (1,1), font = ds.header_font,
             measure='MgMgMgMgMgMgMgMgMg')
     if data_text:
         draw_str(cr, text = data_text, rect = Rright_data, scaling = -1,
-            stroke_rgba = ds.fg, align = (0,1), font = ds.font,
+            stroke_rgba = ds.fg, align = (0,0), font = ds.font,
             measure='MgMgMgMgMgMgMgMgMg')
 
 class CalendarRenderer(_base.CalendarRenderer):
@@ -158,7 +158,7 @@ class CalendarRenderer(_base.CalendarRenderer):
         # draw box shadow
         if S.month.box_shadow:
             f = S.month.box_shadow_size
-            shad = (f,-f) if G.lanhscape else (f,f)
+            shad = (f,-f) if G.landscape else (f,f)
             draw_shadow(cr, rect_from_origin(rect), shad)
 
         # draw day cells
@@ -167,13 +167,12 @@ class CalendarRenderer(_base.CalendarRenderer):
             holiday_tuple = self.holiday_provider(year, month, dom, day)
             data_tuple = self.data_provider(year, month, dom, day)
             data_text = data_tuple[0]
-            data_style = data_tuple[1]
             header = holiday_tuple[0]
             footer = holiday_tuple[1]
             holiday_style = holiday_tuple[2]
             _draw_day_cell(cr, rect = R, day = (year, month, dom, day),
                           header = header, footer = footer, data_text = data_text,
-                          theme = (holiday_style, data_style, G.dom, L), 
+                          theme = (holiday_style, G.dom, L), 
                           show_day_name = True,
                           text_height = text_height)
 
