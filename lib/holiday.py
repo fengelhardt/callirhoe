@@ -454,5 +454,5 @@ if __name__ == '__main__':
     while cur <= d2:
         y,m,d = cur.year, cur.month, cur.day
         hol = hp.get_holiday(y,m,d)
-        if hol: print cur.strftime("%a %b %d %Y"),hol
+        if hol: print(cur.strftime("%a %b %d %Y"),hol)
         cur += timedelta(1)
