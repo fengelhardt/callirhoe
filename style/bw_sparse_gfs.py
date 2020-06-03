@@ -18,11 +18,7 @@
 
 """module defining Greek Font Society fonts for black & white sparse style"""
 
-<<<<<<< HEAD
 from . import bw_sparse as base
-=======
-import style.bw_sparse as base
->>>>>>> python3-setup
 
 # day of week
 class dow(base.dow):

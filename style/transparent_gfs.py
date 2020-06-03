@@ -18,11 +18,7 @@
 
 """module defining Greek Font Society fonts for transparent style"""
 
-<<<<<<< HEAD
 from . import transparent as base
-=======
-import style.transparent as base
->>>>>>> python3-setup
 
 # day of week
 class dow(base.dow):

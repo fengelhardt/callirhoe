@@ -18,11 +18,7 @@
 
 """module defining rainbow color style"""
 
-<<<<<<< HEAD
 from . import default
-=======
-import style.default as default
->>>>>>> python3-setup
 
 # day of week
 class dow(default.dow): pass

@@ -18,11 +18,7 @@
 
 """module defining rainbow color & gfs style"""
 
-<<<<<<< HEAD
 from . import gfs
-=======
-import style.gfs as gfs
->>>>>>> python3-setup
 
 # day of week
 class dow(gfs.dow): pass
