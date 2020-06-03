@@ -18,7 +18,7 @@
 
 """module defining rainbow color & gfs style"""
 
-import gfs
+import style.gfs as gfs
 
 # day of week
 class dow(gfs.dow): pass

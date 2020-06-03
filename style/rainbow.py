@@ -18,7 +18,7 @@
 
 """module defining rainbow color style"""
 
-import default
+import style.default as default
 
 # day of week
 class dow(default.dow): pass

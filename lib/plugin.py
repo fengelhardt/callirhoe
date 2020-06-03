@@ -78,6 +78,8 @@ def get_plugin_paths():
     @rtype: [str,str,..]
     """
     result = [ os.path.expanduser("~/.callirhoe"), sys.path[0] if sys.path[0] else "." ]
+    if(len(os.path.dirname(__file__)) > 0) :
+        result.append(os.path.dirname(__file__)+"/..")
     if resources:
         result.append("resource:")
     return result
