@@ -27,7 +27,11 @@ import optparse
 import sys
 from datetime import date, timedelta
 
+<<<<<<< HEAD
 from . import _base
+=======
+import layouts._base as _base
+>>>>>>> python3-setup
 
 # TODO: merge with base parser...
 def get_parser(layout_name):

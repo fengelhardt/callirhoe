@@ -124,7 +124,11 @@ def color_mix(a, b, frac):
     @param frac: amount of first color
     @rtype: tuple
     """
+<<<<<<< HEAD
     return [x_y[0]*frac + x_y[1]*(1 - frac) for x_y in zip(a,b)]
+=======
+    return map(lambda x,y: x*frac + y*(1 - frac), zip(a,b))
+>>>>>>> python3-setup
 
 def color_scale(a, frac):
     """scale color values

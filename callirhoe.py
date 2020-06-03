@@ -251,11 +251,11 @@ def main_program():
     # the usual "beware of exec()" crap applies here... but come on,
     # this is a SCRIPTING language, you can always hack the source code!!!
     if options.lang_assign:
-        for x in options.lang_assign: exec("Language.%s" % x)
+        for x in options.lang_assign: exec("Language."+ x)
     if options.style_assign:
-        for x in options.style_assign: exec("Style.%s" % x)
+        for x in options.style_assign: exec("Style." + x)
     if options.geom_assign:
-        for x in options.geom_assign: exec("Geometry.%s" % x)
+        for x in options.geom_assign: exec ("Geometry." + x)
 
     calendar.long_month_name = Language.long_month_name
     calendar.long_day_name = Language.long_day_name

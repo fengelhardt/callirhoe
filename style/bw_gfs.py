@@ -18,7 +18,11 @@
 
 """module defining Greek Font Society fonts for black & white style"""
 
+<<<<<<< HEAD
 from . import bw as base
+=======
+import style.bw as base
+>>>>>>> python3-setup
 
 # day of week
 class dow(base.dow):
